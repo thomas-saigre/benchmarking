@@ -78,7 +78,10 @@ class JSONWithCommentsDecoder(json.JSONDecoder):
         super().__init__(**kw)
 
     def decode(self, s: str):
-        s = '\n'.join(l if not l.lstrip().startswith('//') else '' for l in s.split('\n'))
+        """ Decodes a JSON string, removing C-style comments (// and /* */).
+        """
+        s = re.sub(r'//.*', '', s)
+        s = re.sub(r'/\*([\s\S]*?)\*/', '', s)
         return super().decode(s)
 
 class FileHandler:
