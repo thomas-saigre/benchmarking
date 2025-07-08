@@ -2,6 +2,7 @@ import json, os, shutil
 from feelpp.benchmarking.report.atomicReports.model import AtomicReportModel
 from feelpp.benchmarking.report.atomicReports.view import AtomicReportView
 from feelpp.benchmarking.report.atomicReports.controller import AtomicReportController
+from feelpp.benchmarking.reframe.config.configReader import JSONWithCommentsDecoder
 
 class AtomicReport:
     """ Class representing an atomic report. i.e. a report indexed by date, test case, application and machine.
@@ -69,7 +70,7 @@ class AtomicReport:
             file_path (str): The JSON file to parse
         """
         with open(file_path, 'r') as file:
-            data = json.load(file)
+            data = json.load(file, cls=JSONWithCommentsDecoder)
         return data
 
     def createHashParamMap(self,data):

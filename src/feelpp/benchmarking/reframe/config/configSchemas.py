@@ -172,7 +172,7 @@ class ConfigFile(BaseModel):
         for plot in self.plots:
             for ax in [plot.xaxis,plot.secondary_axis,plot.yaxis,plot.color_axis]:
                 if ax and ax.parameter:
-                    assert ax.parameter in parameter_names, f"Parameter not found {ax.parameter} in {parameter_names}"
+                    assert ax.parameter in parameter_names, f"Parameter {ax.parameter} not found in {parameter_names}"
 
         return self
 
